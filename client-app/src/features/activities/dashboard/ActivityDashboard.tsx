@@ -1,5 +1,5 @@
 import { Grid } from "semantic-ui-react"
-import { Activity } from "../../../models/activity"
+import { Activity } from "../../../app/models/activity"
 import ActivityList from "./ActivityList"
 import ActivityDetails from "../details/ActivityDetails"
 import ActivityForm from "../form/ActivityForm"
@@ -14,15 +14,16 @@ interface IProps {
     closeForm: () => void;
     createEdit: (activity: Activity) => void;
     onDeleteActivty: (id: string) => void;
+    isSubmitting: boolean;
 }
 
-function ActivityDashboard( { activities, selectedActivity, onSelectActivity, onCancelSelectActivity, editMode, openForm, closeForm, createEdit, onDeleteActivty } : IProps) {
+function ActivityDashboard( { activities, selectedActivity, onSelectActivity, onCancelSelectActivity, editMode, openForm, closeForm, createEdit, onDeleteActivty, isSubmitting} : IProps) {
 
 
   return (
     <Grid>
         <Grid.Column width='10'>
-            <ActivityList activities={activities} onSelectActivity={onSelectActivity} onDeleteActivty={onDeleteActivty} />
+            <ActivityList activities={activities} onSelectActivity={onSelectActivity} onDeleteActivty={onDeleteActivty} isSubmitting={isSubmitting} />
         </Grid.Column>
         <Grid.Column width='6'>
             {selectedActivity && !editMode &&
@@ -30,7 +31,7 @@ function ActivityDashboard( { activities, selectedActivity, onSelectActivity, on
                              onCancelSelectActivity={onCancelSelectActivity}
                              openForm={openForm} />
             }
-            {editMode &&  <ActivityForm closeForm={closeForm} activity={selectedActivity} createEdit={createEdit}/> }
+            {editMode &&  <ActivityForm closeForm={closeForm} activity={selectedActivity} createEdit={createEdit} isSubmitting={isSubmitting}/> }
         </Grid.Column> 
     </Grid>
   )
