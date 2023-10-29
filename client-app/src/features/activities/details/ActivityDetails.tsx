@@ -1,9 +1,13 @@
-import { Button, Card, Image } from "semantic-ui-react";
+import { Button, Card, Grid, GridColumn, Image } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import Loading from "../../../app/Layout/Loading";
 import { observer } from "mobx-react-lite";
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import ActivityDetailedHeader from "./ActivityDetailedHeader";
+import ActivityDetailedInfo from "./ActivityDetailedInfo";
+import ActivityDetailedChat from "./ActivityDetailedChat";
+import ActivityDetailedSidebar from "./ActivityDetailedSidebar";
 
 function ActivityDetails() {
 
@@ -19,7 +23,21 @@ function ActivityDetails() {
 
     return (
       <>
-        <Card fluid>
+        <Grid>
+          <Grid.Column width={10}>
+            <ActivityDetailedHeader activity={activity} />
+            <ActivityDetailedInfo activity={activity}  />
+            <ActivityDetailedChat />
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <ActivityDetailedSidebar />
+          </Grid.Column>
+        </Grid>
+
+
+
+
+        {/* <Card fluid>
           <Image src={`/assets/categoryImages/${activity.category}.jpg`} />
           <Card.Content>
             <Card.Header>{activity.title}</Card.Header>
@@ -36,7 +54,7 @@ function ActivityDetails() {
                 <Button as={Link} to='/activities'  basic color="grey" content='Cancel' />
             </Button.Group>
           </Card.Content>
-        </Card>
+        </Card> */}
       </>
     );
   }
